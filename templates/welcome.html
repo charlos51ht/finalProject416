@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Welcome Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <nav class="nav navbar-dark bg-dark navbar-expand-lg">
+        <a class="navbar-brand" href="#">(name pending)</a>
+        <button class="navbar-toggler ms-auto" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse me-auto" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Welcome</a>
+                </li>
+                <!---This sign-in should only be visible when a user is signed in-->
+                {% if user_signed_in == False %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="/BandView/sign-in">Sign-In</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Trending Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Search For Band</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Search for Venue</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">BandName/VenueName</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Profile Page</a>
+                        <a class="dropdown-item" href="#">Sign-Out</a>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div id="Our Mission" class="container rounded border border-4">
+        <!---Just an opening paragraph about our mission with this website-->
+        <div class="row">
+            <h1 class="">STAY LOCAL + LIVE</h1>
+            <p>
+                Connect with each other to entertain people with the best local live music around. Whether you are a local band rocking out and
+                trying to spread the word, or a new venue that needs something to keep the night moving, this tool (PENDING NAME) will give you all the
+                necessary tools you need in order to accomplish your goals and entertain those with the best live and local music around.
+            </p>
+        </div>
+    </div>
+    <div id="Band Functions" class="container rounded border border-4 border-warning">
+        <!---Function of this div: color blue, opening section with description, three title cards then button, color Orange-->
+        <div class="row">
+            <p>Need a boost to make your band known around town? Look no further!</p>
+            <div class="col">
+                <div class="card">
+                    <img src="undraw_News_re_6uub.png" class="card-img-top" alt="...">
+                    <p>Function 1: search for gigs that can get your name around town </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="undraw_News_re_6uub.png" class="card-img-top" alt="...">
+                    <p>Function 2: Customize your profile to display what you guys can do</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="undraw_News_re_6uub.png" class="card-img-top" alt="...">
+                    <p>Function 3: Organize events with venues with ease.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Venue Functions" class="container rounded border border-4 border-primary">
+        <!---Function of this div: color blue, opening section with description, three title cards then button, color blue-->
+        <div class="row">
+            <p>Need to make a quiet Thursday night more lively in your venue? Look no further!</p>
+            <div class="col">
+                <div class="card">
+                    <p>Function 1: search for bands that can get your name around town </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <p>Function 2: Customize your profile to display information like what genre you look for, where your bands play and general atttendance</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <p>Function 3: Organize and advertise public events with venues with ease.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="container border-top p-3">
+        <div class="row">
+            <div class="col-sm-4">
+                <h2 class="display-4">Contact</h2>
+            </div>
+            <div class="col-sm-8">
+                <p>
+                    <a href="#">Charles Lewis</a><br>
+                    Developer #1<br>
+                    <i class="bi bi-telephone-fill text-success"></i>(860) 878 9645
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

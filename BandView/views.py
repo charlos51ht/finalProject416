@@ -8,3 +8,6 @@ def welcome(request):
 
 def signin(request):
     return render(request, "sign-in.html")
+
+def bandsignup(request):
+    return render(request, 'bandsignup.html')

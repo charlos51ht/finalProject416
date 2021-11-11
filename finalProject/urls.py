@@ -18,5 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('BandView/', include('BandView.urls'))
+    path('bandview/', include('BandView.urls'))
 ]

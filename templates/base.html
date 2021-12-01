@@ -23,7 +23,7 @@
                     <a class="nav-link active" href="#">Welcome</a>
                 </li>
                 <!---This sign-in should only be visible when a user is signed in-->
-                {% if user_signed_in %}
+                {% if user_signed_in == False %}
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'sign-in' %}">Sign-In</a>
                 </li>
@@ -35,13 +35,13 @@
                     <a class="nav-link active" href="#">Search For Band</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'create-account' %}">Search for Venue</a>
+                    <a class="nav-link active" href="#">Search for Venue</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">BandName/VenueName</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Profile Page</a>
-                        <a class="dropdown-item" href="#">Sign-Out</a>
+                        <a class="dropdown-item" href="{% url 'logout_user' %}">Sign-Out</a>
                     </div>
                 </li>
                 {% endif %}

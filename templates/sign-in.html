@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form action="{% url 'welcome' %}">
+{% extends 'base.html' %}
+{% block body %}
+    <form method="post">
         {% csrf_token %}
-        <input type = "text">
-        <input type ="password">
-        <button type='submit' onclick = "signIn()">Sign In</button>
+        {{ form.as_p }}
+        <input type="submit" value="Login">
+        <a href="{% url 'band-sign-up' %}">SignUp</a>
     </form>
-</body>
-</html>
+{% endblock %}

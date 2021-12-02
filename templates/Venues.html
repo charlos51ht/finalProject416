@@ -3,17 +3,15 @@
     <div class="container">
         <div class="row justify content center">
             <div class="col-10">
-                {% for band in bands %}
+                {% for venue in venues %}
                     <div class="card">
                         <div class="card-header">
-                            {{ band.bandname }}
+                            {{ venue.venueName }}
                         </div>
                         <div class="card-body">
-                            {{ band.profilePic }}
-                            {{ band.email }}
-                            {{ band.location }}
-                            {{ band.link }}
-                            <a href="{% url 'BandProfile' band.id %}"><button class="btn btn-primary">Profile page</button></a>
+                            {{ venue.profilePic }}
+                            {{ venue.address }}
+                            <a href="{% url 'VenueProfile' band.id %}"><button class="btn btn-primary">Profile page</button></a>
                         </div>
                     </div>
                 {% endfor %}

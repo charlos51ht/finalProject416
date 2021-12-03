@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -30,7 +30,6 @@ def bandsignup(request):
     if request.method == 'POST':
         form = BandForm(request.POST or None)
         if form.is_valid():
-        # get the user info from the form data and log in the user
             form.save()
             return redirect('Bands')
     else:
@@ -42,7 +41,7 @@ def venuesignup(request):
         form = VenueForm(request.POST or None)
         if form.is_valid():
             form.save()
-            return redirect('welcome')
+            return redirect('venues')
     else:
         form = VenueForm
         return render(request, 'AddVenue.html', {'form': form})

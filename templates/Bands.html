@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% block body %}
     <div class="container">
-        <div class="row justify content center">
+        <div class="row justify content center m-5">
             <div class="col-10">
                 {% for band in bands %}
                     <div class="card">
                         <div class="card-header">
-                            {{ band.bandname }}
+                            {{ band.bandName }}
                         </div>
                         <div class="card-body">
-                            {{ band.profilePic }}
-                            {{ band.email }}
-                            {{ band.location }}
-                            {{ band.link }}
-                            <a href="{% url 'BandProfile' band.id %}"><button class="btn btn-primary">Profile page</button></a>
+                            {% comment %}{{ band.profilePic }} {% endcomment %}
+                            Email: {{ band.email }} <br>
+                            Located in: {{ band.location }} <br>
+                            <a href="{{ band.link }}">{{ band.link }}</a><br>
+                            {% comment %}<a href="{% url 'BandProfile' band.id %}"><button class="btn btn-primary">Profile page</button></a>{% endcomment %}
                         </div>
                     </div>
                 {% endfor %}

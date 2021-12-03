@@ -9,9 +9,10 @@
                             {{ venue.venueName }}
                         </div>
                         <div class="card-body">
-                            {{ venue.profilePic }}
                             {{ venue.address }}
-                            <a href="{% url 'VenueProfile' band.id %}"><button class="btn btn-primary">Profile page</button></a>
+                            {{ venue.venueEmail }}
+                            <a href="{{ venue.website }}">{{ venue.website }}</a>
+                            {% comment %}<a href="{% url 'VenueProfile' band.id %}"><button class="btn btn-primary">Profile page</button></a>{% endcomment %}
                         </div>
                     </div>
                 {% endfor %}

@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <div class="row justify content center m-5">
+            <div class="col-10">
+                <div class="card">
+                    <div class="card-header">{{ venue.venueName }}</div>
+                    <div class="card-body">
+                        {{ venue.address }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

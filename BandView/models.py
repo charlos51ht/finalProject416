@@ -11,7 +11,10 @@ class Band(models.Model):
     link = models.CharField(max_length=100)
     genre = models.CharField(max_length=30, blank=False)
     location = models.CharField(max_length=100)
-    #profilePic = models.ImageField(null=True)
+    profilePic = models.ImageField(null=True, blank=True, upload_to="images/")
+
+    def __str__(self):
+        return self.bandName
 
 class Venue(models.Model):
     #user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -21,7 +24,10 @@ class Venue(models.Model):
     venueEmail = models.EmailField(max_length=254, blank=False)
     venuePhone = models.IntegerField(blank=False)
     website = models.CharField(max_length=200)
-    #profilePic = models.ImageField(blank=True)
+    profilePic = models.ImageField(null=True, blank=True, upload_to="images/")
+
+    def __str__(self):
+        return self.venueName
 
 class Post(models.Model):
     post_id = models.IntegerField(primary_key=True)
@@ -30,3 +36,6 @@ class Post(models.Model):
     media = models.FileField()
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
+
+
+

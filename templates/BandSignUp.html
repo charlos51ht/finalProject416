@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block body %}
     <h1>Add your band!</h1>
-    <form method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit">
     </form>
-        <a href="{% url 'welcome' %}">Exit</a>
-    </div>
+    <a href="{% url 'welcome' %}">Exit</a>
 {% endblock %}

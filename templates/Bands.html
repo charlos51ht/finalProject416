@@ -5,15 +5,15 @@
             <div class="col-10">
                 {% for band in bands %}
                     <div class="card">
+                        <img class="card-img-top" src="{{ band.profilePic }}" alt="">
                         <div class="card-header">
                             {{ band.bandName }}
                         </div>
                         <div class="card-body">
-                            {% comment %}{{ band.profilePic }} {% endcomment %}
                             Email: {{ band.email }} <br>
                             Located in: {{ band.location }} <br>
                             <a href="{{ band.link }}">{{ band.link }}</a><br>
-                            {% comment %}<a href="{% url 'BandProfile' band.id %}"><button class="btn btn-primary">Profile page</button></a>{% endcomment %}
+                            <a href="{% url 'band-profile' band.id %}"><button class="btn btn-primary">Profile page</button></a>
                         </div>
                     </div>
                 {% endfor %}

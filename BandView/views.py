@@ -11,8 +11,21 @@ from .forms import BandForm, VenueForm, UserRegistrationForm
 # Create your views here.
 def welcome(request):
     user = request.user
+    band = None
+    venue = None
+    if(request.user.is_authenticated):
+        try:
+            band = Band.objects.get(user=user)
+        except band.DoesNotExist:
+            band = None
+        try:
+            venue = Band.objects.get(user=user)
+        except venue.DoesNotExist:
+            venue = None
     context = {'user_signed_in': user.is_authenticated,
-               'user_name': user.username}
+               'user_name': user.username,
+               'band': band,
+               'venue':venue}
     return render(request, 'welcome.html', context)
 
 
@@ -47,7 +60,9 @@ def bandsignup(request):
     if request.method == 'POST':
         form = BandForm(request.POST or None)
         if form.is_valid():
-            form.save()
+            band = form.save(commit=False)
+            band.user = request.user
+            band.save()
             return redirect('bands')
     else:
         form = BandForm
@@ -58,6 +73,7 @@ def venuesignup(request):
     if request.method == 'POST':
         form = VenueForm(request.POST or None)
         if form.is_valid():
+            form.fields['user'] = request.user
             form.save()
             return redirect('venues')
     else:

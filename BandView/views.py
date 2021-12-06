@@ -75,6 +75,44 @@ def venueprofile(request, venue_id):
     context = {'venue': venue}
     return render(request, 'VenueProfile.html', context)
 
+def updateBand(request, band_id):
+    band = Band.objects.get(pk=band_id)
+    form = BandForm(request.POST or None, instance=band)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect ('bands')
+    context = {'form':form}
+    return render(request, 'updateBand.html', context)
+
+def deleteBand(request, band_id):
+    band = Band.objects.get(pk=band_id)
+    if request.method == 'POST':
+        band.delete()
+        return redirect('bands')
+    else:
+        context = {'band': band}
+        return render(request, 'deleteBand.html', context)
+
+def updateVenue(request, venue_id):
+    venue = Venue.objects.get(pk=venue_id)
+    form = VenueForm(request.POST or None, instance=venue)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('venues')
+    context = {'form': form}
+    return render(request, 'updateVenue.html', context)
+
+def deleteVenue(request, venue_id):
+    venue = Band.objects.get(pk=venue_id)
+    if request.method == 'POST':
+        venue.delete()
+        return redirect('venues')
+    else:
+        context = {'venue': venue}
+        return render(request, 'deleteVenue.html', context)
+
 def signout(request):
     logout(request)
     return redirect('welcome')

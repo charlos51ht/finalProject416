@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BandView.apps.BandviewConfig',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = ['static']
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

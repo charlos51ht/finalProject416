@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .models import Band, Venue
+from django.contrib.auth.forms import AuthenticationForm
+from .models import Band, Venue, UserType
 from .forms import BandForm, VenueForm, UserRegistrationForm
 
 # Create your views here.
@@ -16,12 +16,15 @@ def welcome(request):
 
 def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user_type = form.cleaned_data['user_type']
+            UserType.objects.create(user=user, user_type=user_type)
+            login(request, user)
             return redirect('welcome')
     else:
-        form = UserCreationForm()
+        form = UserRegistrationForm()
     return render(request, 'Registration.html', {'form': form})
 
 def signin(request):

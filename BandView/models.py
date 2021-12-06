@@ -37,5 +37,12 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
 
+TYPE_CHOICES = (
+    ('Band', 'Band'),
+    ('Venue', 'Venue')
+)
 
+class UserType(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_type = models.CharField(max_length=5, blank=False, choices=TYPE_CHOICES)
 

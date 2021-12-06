@@ -11,5 +11,9 @@ urlpatterns = [
     path('venues/', views.venues, name="venues"),
     path('bandprofile/<str:band_id>', views.bandprofile, name="band-profile"),
     path('venueprofile/<str:venue_id>', views.venueprofile, name="venue-profile"),
+    path('updateband/<str:band_id>', views.updateBand, name="updateBand"),
+    path('deleteband/<str:band_id>', views.deleteBand, name="deleteBand"),
+    path('updatevenue/<str:venue_id>', views.updateVenue, name="updateVenue"),
+    path('deletevenue/<str:venue_id>', views.deleteVenue, name="deleteVenue"),
     path('sign-out/', views.signout, name="sign-out")
 ]

@@ -7,6 +7,7 @@
                     <div class="card-header">{{ band.bandName }}</div>
                     <div class="card-body">
                         Members: {{ band.members }}
+                        <a href="{% url 'updateBand' band.id %}"><button class="btn btn-primary">Update</button></a>
                     </div>
                 </div>
             </div>

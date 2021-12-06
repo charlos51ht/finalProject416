@@ -19,7 +19,7 @@ def register_view(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user_type = form.cleaned_data['user_type']
+            user_type = form.cleaned_data['type_user']
             UserType.objects.create(user=user, user_type=user_type)
             login(request, user)
             return redirect('welcome')

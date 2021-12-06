@@ -1,0 +1,10 @@
+#profile-text{
+    font-family: "Times New Roman", serif;
+    color: midnightblue;
+
+}
+
+#profile-header{
+    text-shadow: 1px 1px 1px coral,
+                2px 2px 1px coral;
+}

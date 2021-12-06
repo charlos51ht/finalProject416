@@ -7,12 +7,14 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import Band, Venue, UserType
 from .forms import BandForm, VenueForm, UserRegistrationForm
 
+
 # Create your views here.
 def welcome(request):
     user = request.user
     context = {'user_signed_in': user.is_authenticated,
                'user_name': user.username}
     return render(request, 'welcome.html', context)
+
 
 def register_view(request):
     if request.method == 'POST':
@@ -27,6 +29,7 @@ def register_view(request):
         form = UserRegistrationForm()
     return render(request, 'Registration.html', {'form': form})
 
+
 def signin(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -39,6 +42,7 @@ def signin(request):
         form = AuthenticationForm()
     return render(request, 'sign-in.html', {'form': form})
 
+
 def bandsignup(request):
     if request.method == 'POST':
         form = BandForm(request.POST or None)
@@ -48,6 +52,7 @@ def bandsignup(request):
     else:
         form = BandForm
         return render(request, 'BandSignUp.html', {'form': form})
+
 
 def venuesignup(request):
     if request.method == 'POST':
@@ -59,13 +64,16 @@ def venuesignup(request):
         form = VenueForm
         return render(request, 'AddVenue.html', {'form': form})
 
+
 def bands(request):
     bands = Band.objects.all()
     return render(request, 'Bands.html', {'bands': bands})
 
+
 def venues(request):
     venues = Venue.objects.all()
     return render(request, 'Venues.html', {'venues': venues})
+
 
 def bandprofile(request, band_id):
     b = Band.objects.get(pk=band_id)
@@ -78,15 +86,17 @@ def venueprofile(request, venue_id):
     context = {'venue': venue}
     return render(request, 'VenueProfile.html', context)
 
+
 def updateBand(request, band_id):
     band = Band.objects.get(pk=band_id)
     form = BandForm(request.POST or None, instance=band)
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return redirect ('bands')
-    context = {'form':form}
+            return redirect('bands')
+    context = {'form': form}
     return render(request, 'updateBand.html', context)
+
 
 def deleteBand(request, band_id):
     band = Band.objects.get(pk=band_id)
@@ -96,6 +106,7 @@ def deleteBand(request, band_id):
     else:
         context = {'band': band}
         return render(request, 'deleteBand.html', context)
+
 
 def updateVenue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
@@ -107,6 +118,7 @@ def updateVenue(request, venue_id):
     context = {'form': form}
     return render(request, 'updateVenue.html', context)
 
+
 def deleteVenue(request, venue_id):
     venue = Band.objects.get(pk=venue_id)
     if request.method == 'POST':
@@ -115,6 +127,7 @@ def deleteVenue(request, venue_id):
     else:
         context = {'venue': venue}
         return render(request, 'deleteVenue.html', context)
+
 
 def signout(request):
     logout(request)

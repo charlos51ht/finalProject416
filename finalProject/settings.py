@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'BandView.apps.BandviewConfig',
     'crispy_forms'
+
 ]
 
 MIDDLEWARE = [

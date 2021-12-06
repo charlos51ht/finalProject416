@@ -33,7 +33,9 @@
                     <p>Function 3: Organize events with venues with ease.</p>
                 </div>
             </div>
-            <a href="{% url 'band-sign-up' %}">Sign Up for Band</a>
+            {% if venue == None and band == None %}
+                <a href="{% url 'band-sign-up' %}">Sign Up for Band</a>
+            {% endif %}
         </div>
     </div>
     <div id="Venue Functions" class="container rounded border border-4 border-primary">
@@ -55,7 +57,9 @@
                     <p>Function 3: Organize and advertise public events with venues with ease.</p>
                 </div>
             </div>
-            <a href="{% url 'venue-sign-up' %}">Sign Up for Venue</a>
+            {% if venue == None or band == None %}
+                <a href="{% url 'venue-sign-up' %}">Sign Up for Band</a>
+            {% endif %}
         </div>
     </div>
     <footer class="container border-top p-3">

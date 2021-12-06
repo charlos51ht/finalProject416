@@ -10,14 +10,17 @@ from .forms import BandForm, VenueForm, UserRegistrationForm
 # Create your views here.
 def welcome(request):
     user = request.user
-    try:
-        band = Band.objects.get(user=user)
-    except band.DoesNotExist:
-        band = None
-    try:
-        venue = Band.objects.get(user=user)
-    except venue.DoesNotExist:
-        venue = None
+    band = None
+    venue = None
+    if(request.user.is_authenticated):
+        try:
+            band = Band.objects.get(user=user)
+        except band.DoesNotExist:
+            band = None
+        try:
+            venue = Band.objects.get(user=user)
+        except venue.DoesNotExist:
+            venue = None
     context = {'user_signed_in': user.is_authenticated,
                'user_name': user.username,
                'band': band,

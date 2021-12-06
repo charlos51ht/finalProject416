@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse me-auto" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Welcome</a>
+                    <a class="nav-link active" href="{% url 'welcome' %}">Welcome</a>
                 </li>
                 <!---This sign-in should only be visible when a user is signed in-->
                 {% if user_signed_in == False %}
@@ -29,13 +29,10 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Trending Page</a>
+                    <a class="nav-link active" href="{% url 'bands' %}">Search For Band</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Search For Band</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Search for Venue</a>
+                    <a class="nav-link active" href="{% url 'venues' %}">Search for Venue</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">BandName/VenueName</a>

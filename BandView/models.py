@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Band(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,unique=True)
     bandName = models.CharField(max_length=100, blank=False)
     bandDescription = models.TextField()
     email = models.EmailField(max_length=254, blank=False)
@@ -17,7 +17,7 @@ class Band(models.Model):
         return self.bandName
 
 class Venue(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE, unique=True)
     venueName = models.CharField(max_length=100, blank=False)
     venueDescription = models.TextField()
     address = models.CharField(max_length=200, blank=False)

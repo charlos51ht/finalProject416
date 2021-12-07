@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Band(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE,unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bandName = models.CharField(max_length=100, blank=False)
     bandDescription = models.TextField()
     email = models.EmailField(max_length=254, blank=False)
@@ -17,7 +17,7 @@ class Band(models.Model):
         return self.bandName
 
 class Venue(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE, unique=True)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     venueName = models.CharField(max_length=100, blank=False)
     venueDescription = models.TextField()
     address = models.CharField(max_length=200, blank=False)
@@ -29,13 +29,13 @@ class Venue(models.Model):
     def __str__(self):
         return self.venueName
 
-class Post(models.Model):
-    post_id = models.IntegerField(primary_key=True)
-    band = models.ForeignKey(User, on_delete=models.CASCADE,related_name="Band")
-    venue = models.ForeignKey(User, on_delete=models.CASCADE,related_name="Venue")
-    media = models.FileField()
-    title = models.CharField(max_length=50)
-    description = models.CharField(max_length=150)
+# class Post(models.Model):
+#     post_id = models.IntegerField(primary_key=True)
+#     band = models.ForeignKey(User, on_delete=models.CASCADE,related_name="Band")
+#     venue = models.ForeignKey(User, on_delete=models.CASCADE,related_name="Venue")
+#     media = models.FileField()
+#     title = models.CharField(max_length=50)
+#     description = models.CharField(max_length=150)
 
 TYPE_CHOICES = (
     ('Band', 'Band'),

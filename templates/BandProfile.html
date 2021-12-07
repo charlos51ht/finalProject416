@@ -12,9 +12,12 @@
                         <h6><span id="profile-text">Website: </span><a href="{{ band.link }}">{{ band.link }}</a></h6>
                         <h6><span id="profile-text">Genre: </span>{{ band.genre }}</h6>
                         <h6><span id="profile-text">Located in: </span>{{ band.location }}</h6>
-
-                        <a href="{% url 'updateBand' band.id %}"><button class="btn btn-primary">Update</button></a>
-                        <a href="{% url 'deleteBand' band.id %}"><button class="btn btn-danger">Delete</button></a>
+                        {% if user.is_authenticated %}
+                            {% if user.id == band.user.id %}
+                                <a href="{% url 'updateBand' band.id %}"><button class="btn btn-primary">Update</button></a>
+                                <a href="{% url 'deleteBand' band.id %}"><button class="btn btn-danger">Delete</button></a>
+                            {% endif %}
+                    {% endif %}
                     </div>
                 </div>
             </div>

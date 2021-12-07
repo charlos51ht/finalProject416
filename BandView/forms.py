@@ -7,11 +7,18 @@ class BandForm(forms.ModelForm):
     class Meta:
         model = Band
         fields = '__all__'
+        exclude = ["user"]
+
+        widgets = {
+            #'user': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'yes', 'id': 'band_user','value': '', 'type':'hidden'})
+            'user': forms.Select(attrs={'class': 'form-control'})
+        }
 
 class VenueForm(forms.ModelForm):
     class Meta:
         model = Venue
         fields = '__all__'
+        exclude = ["user"]
 
 class UserRegistrationForm(UserCreationForm):
     TYPE_CHOICES = (

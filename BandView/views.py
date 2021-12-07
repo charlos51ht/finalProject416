@@ -1,32 +1,33 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Band, Venue, UserType
 from .forms import BandForm, VenueForm, UserRegistrationForm
+from django.db.models import Count
 
 
 # Create your views here.
 def welcome(request):
-    user = request.user
-    band = None
-    venue = None
-    if(request.user.is_authenticated):
-        try:
-            band = Band.objects.get(user=user)
-        except band.DoesNotExist:
-            band = None
-        try:
-            venue = Band.objects.get(user=user)
-        except venue.DoesNotExist:
-            venue = None
-    context = {'user_signed_in': user.is_authenticated,
-               'user_name': user.username,
-               'band': band,
-               'venue':venue}
-    return render(request, 'welcome.html', context)
+    # user = request.user
+    # band = None
+    # venue = None
+    # if(request.user.is_authenticated):
+    #     try:
+    #         band = Band.objects.get(user=user)
+    #     except band.DoesNotExist:
+    #         band = None
+    #     try:
+    #         venue = Band.objects.get(user=user)
+    #     except venue.DoesNotExist:
+    #         venue = None
+    # context = {'user_signed_in': user.is_authenticated,
+    #            'user_name': user.username,
+    #            'band': band,
+    #            'venue':venue}
+    return render(request, 'welcome.html')
 
 
 def register_view(request):
@@ -55,6 +56,27 @@ def signin(request):
         form = AuthenticationForm()
     return render(request, 'sign-in.html', {'form': form})
 
+def signup(request):
+    user = UserType.objects.get(id=request.user.id)
+    if (user.user_type == 'Band' and Band.objects.count() == 0) or (user.user_type == 'Venue' and Venue.objects.count() == 0):
+        redirect_page = "venues"
+        if user.user_type == 'Band':
+            form = BandForm(request.POST or None)
+            redirect_page = "bands"
+        elif user.user_type == 'Venue':
+            form = VenueForm(request.POST or None)
+        if request.method == 'POST':
+            if form.is_valid():
+                #band = form.save(commit=False)
+                form.instance.user = request.user
+                form.save()
+                return redirect(redirect_page)
+        return render(request, 'SignUp.html', {'form': form})
+    else:
+        return redirect('welcome')
+
+
+
 
 def bandsignup(request):
     if request.method == 'POST':
@@ -62,8 +84,10 @@ def bandsignup(request):
         if form.is_valid():
             band = form.save(commit=False)
             band.user = request.user
-            band.save()
+            form.save()
             return redirect('bands')
+        else:
+            return HttpResponse("Form is not valid")
     else:
         form = BandForm
         return render(request, 'BandSignUp.html', {'form': form})
@@ -76,6 +100,7 @@ def venuesignup(request):
             form.fields['user'] = request.user
             form.save()
             return redirect('venues')
+
     else:
         form = VenueForm
         return render(request, 'AddVenue.html', {'form': form})

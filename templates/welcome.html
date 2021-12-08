@@ -33,9 +33,6 @@
                     <p>Function 3: Organize events with venues with ease.</p>
                 </div>
             </div>
-            {% if venue == None and band == None %}
-                <a href="{% url 'band-sign-up' %}">Sign Up for Band</a>
-            {% endif %}
         </div>
     </div>
     <div id="Venue Functions" class="container rounded border border-4 border-primary">
@@ -57,9 +54,11 @@
                     <p>Function 3: Organize and advertise public events with venues with ease.</p>
                 </div>
             </div>
-            {% if venue == None or band == None %}
-                <a href="{% url 'venue-sign-up' %}">Sign Up for Band</a>
-            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-center m-5">
+        <div class="col-1">
+            <a href="{% url 'sign-up' %}"><button class="btn btn-primary">Sign up here!</button></a>
         </div>
     </div>
     <div id="Upcoming Events" class="container">
@@ -70,8 +69,27 @@
         {% for event in events %}
             <div class="row border">
                 <h1>{{ event.event_band }} is playing at {{ event.event_venue }}</h1>
-                <p>on {{ event.time }}</p>
+                <p>at {{ event.time }}</p>
             </div>
         {% endfor %}
     </div>
+    <footer class="container border-top p-3">
+        <div class="row">
+            <div class="col-sm-4">
+                <h2 class="display-4">Contact</h2>
+            </div>
+            <div class="col-sm-8">
+                <p>
+                    <a href="#">Charles Lewis</a><br>
+                    Developer #1<br>
+                    <i class="bi bi-telephone-fill text-success"></i>(860) 878 9645
+                </p>
+                <p>
+                    <a href="#">Tom Fijalkowski</a><br>
+                    Developer #2<br>
+                    <i class="bi bi-telephone-fill text-success"></i>(860) 839 6868
+                </p>
+            </div>
+        </div>
+    </footer>
 {% endblock %}

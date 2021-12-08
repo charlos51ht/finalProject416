@@ -11,8 +11,6 @@ class BandForm(forms.ModelForm):
         exclude = ["user"]
 
         widgets = {
-            #'user': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'yes', 'id': 'band_user','value': '', 'type':'hidden'})
-            'user': forms.Select(attrs={'class': 'form-control'})
         }
 
 class VenueForm(forms.ModelForm):

@@ -12,7 +12,9 @@
                         <a href="{% url 'bands' %}" class="btn btn-secondary">CANCEL</a>
                         <form action="" method="post" style="display: inline">
                             {% csrf_token %}
-                            <input class="btn btn-danger text-light" type="submit" value="DELETE">
+                            {% if user.id == band.user.id %}
+                                <input class="btn btn-danger text-light" type="submit" value="DELETE">
+                            {% endif %}
                         </form>
                     </div>
                 </div>

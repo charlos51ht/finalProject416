@@ -62,8 +62,8 @@ def signin(request):
     return render(request, 'sign-in.html', {'form': form})
 
 def signup(request):
-    user = UserType.objects.get(id=request.user.id)
-    if (user.user_type == 'Band' and Band.objects.count() == 0) or (user.user_type == 'Venue' and Venue.objects.count() == 0):
+    user = UserType.objects.get(user_id=request.user.id)
+    if (user.user_type == 'Band' and Band.objects.filter(user=request.user).count() == 0) or (user.user_type == 'Venue' and Venue.objects.filter(user=request.user).count() == 0):
         redirect_page = "venues"
         if user.user_type == 'Band':
             form = BandForm(request.POST or None)

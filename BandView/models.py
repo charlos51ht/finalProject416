@@ -46,3 +46,9 @@ class UserType(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_type = models.CharField(max_length=5, blank=False, choices=TYPE_CHOICES)
 
+class Event(models.Model):
+    event_band = models.OneToOneField(Band, on_delete=models.CASCADE)
+    event_venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
+    date = models.DateField()
+    time = models.TimeField()
+

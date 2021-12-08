@@ -62,18 +62,16 @@
             {% endif %}
         </div>
     </div>
-    <footer class="container border-top p-3">
-        <div class="row">
-            <div class="col-sm-4">
-                <h2 class="display-4">Contact</h2>
+    <div id="Upcoming Events" class="container">
+        <h1>Upcoming Events</h1>
+        {% if venue != None %}
+            <a href="{% url 'createEvent' %}">Create Event</a>
+        {% endif %}
+        {% for event in events %}
+            <div class="row border">
+                <h1>{{ event.event_band }} is playing at {{ event.event_venue }}</h1>
+                <p>on {{ event.time }}</p>
             </div>
-            <div class="col-sm-8">
-                <p>
-                    <a href="#">Charles Lewis</a><br>
-                    Developer #1<br>
-                    <i class="bi bi-telephone-fill text-success"></i>(860) 878 9645
-                </p>
-            </div>
-        </div>
-    </footer>
+        {% endfor %}
+    </div>
 {% endblock %}

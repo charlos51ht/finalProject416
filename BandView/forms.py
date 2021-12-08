@@ -1,7 +1,8 @@
 from django import forms
-from .models import Band, Venue
+from .models import Band, Venue,Event
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.admin import widgets
 
 class BandForm(forms.ModelForm):
     class Meta:
@@ -31,3 +32,18 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ['username', 'type_user', 'password1', 'password2']
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
+
+class EventForm(forms.ModelForm):
+
+    class Meta:
+        model = Event
+        fields = '__all__'
+        exclude = ["event_venue"]
+        widgets = {
+            'date': DateInput(),
+            'time': TimeInput()
+        }

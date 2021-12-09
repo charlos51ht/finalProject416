@@ -8,16 +8,16 @@
         <div class="row justify-content-center m-5">
             <div class="col-10">
                 <div class="card bg-info">
-                    <h1 class="card-header text-center text-light" id="profile-header">{{ band.bandName }}</h1>
+                    <h1 class="card-header text-center text-light" id="profile-header">{{ p_bandb.bandName }}</h1>
                     <div class="card-body text-light">
-                        <h6><span id="profile-text">Band Description: </span>{{ band.bandDescription }}</h6>
-                        <h6><span id="profile-text">Email: </span>{{ band.email }}</h6>
-                        <h6><span id="profile-text">Phone: </span>{{ band.phone }}</h6>
-                        <h6><span id="profile-text">Website: </span><a href="{{ band.link }}">{{ band.link }}</a></h6>
-                        <h6><span id="profile-text">Genre: </span>{{ band.genre }}</h6>
-                        <h6><span id="profile-text">Located in: </span>{{ band.location }}</h6>
+                        <h6><span id="profile-text">Band Description: </span>{{p_band.bandDescription }}</h6>
+                        <h6><span id="profile-text">Email: </span>{{ p_band.email }}</h6>
+                        <h6><span id="profile-text">Phone: </span>{{ p_band.phone }}</h6>
+                        <h6><span id="profile-text">Website: </span><a href="https://{{ p_band.link }}">{{ p_band.link }}</a></h6>
+                        <h6><span id="profile-text">Genre: </span>{{ p_band.genre }}</h6>
+                        <h6><span id="profile-text">Located in: </span>{{ p_band.location }}</h6>
                         {% if user.is_authenticated %}
-                            {% if user.id == band.user.id %}
+                            {% if user.id == p_band.user.id %}
                                 <a class="btn btn-primary" href="{% url 'updateBand' band.id %}">Update</a>
                                 <a class="btn btn-danger" href="{% url 'deleteBand' band.id %}">Delete</a>
                             {% endif %}

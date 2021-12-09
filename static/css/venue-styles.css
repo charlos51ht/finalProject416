@@ -1,13 +1,16 @@
 #profile-text{
-    font-family: "Times New Roman",serif;
-    color:darkgoldenrod;
+    font-family: "Times New Roman", serif;
+    color: darkgoldenrod;
     font-size: 22px;
     background: turquoise;
-}
-#profile-header{
-    text-shadow:1px 1px 1px coral, 2px 2px 1px coral;
 
 }
+
+#profile-header{
+    text-shadow: 1px 1px 1px coral,
+                2px 2px 1px coral;
+}
+
 a{
-    color:white;
+    color: white;
 }

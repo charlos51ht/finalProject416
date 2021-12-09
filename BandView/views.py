@@ -62,24 +62,26 @@ def signin(request):
     return render(request, 'sign-in.html', {'form': form})
 
 def signup(request):
-    user = UserType.objects.get(user_id=request.user.id)
-    if (user.user_type == 'Band' and Band.objects.filter(user=request.user).count() == 0) or (user.user_type == 'Venue' and Venue.objects.filter(user=request.user).count() == 0):
-        redirect_page = "venues"
-        if user.user_type == 'Band':
-            form = BandForm(request.POST or None)
-            redirect_page = "bands"
-        elif user.user_type == 'Venue':
-            form = VenueForm(request.POST or None)
-        if request.method == 'POST':
-            if form.is_valid():
-                #band = form.save(commit=False)
-                form.instance.user = request.user
-                form.save()
-                return redirect(redirect_page)
-        return render(request, 'SignUp.html', {'form': form})
+    if request.user.is_authenticated:
+        user = UserType.objects.get(user_id=request.user.id)
+        if (user.user_type == 'Band' and Band.objects.filter(user=request.user).count() == 0) or (user.user_type == 'Venue' and Venue.objects.filter(user=request.user).count() == 0):
+            redirect_page = "venues"
+            if user.user_type == 'Band':
+                form = BandForm(request.POST or None)
+                redirect_page = "bands"
+            elif user.user_type == 'Venue':
+                form = VenueForm(request.POST or None)
+            if request.method == 'POST':
+                if form.is_valid():
+                    #band = form.save(commit=False)
+                    form.instance.user = request.user
+                    form.save()
+                    return redirect(redirect_page)
+            return render(request, 'SignUp.html', {'form': form})
+        else:
+            return redirect('welcome')
     else:
-        return redirect('welcome')
-
+        return redirect('notauthenticated')
 
 
 

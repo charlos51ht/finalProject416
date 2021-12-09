@@ -16,8 +16,8 @@
                         <div class="card-body">
                             Email: {{ band.email }} <br>
                             Located in: {{ band.location }} <br>
-                            <a href="{{ band.link }}">{{ band.link }}</a><br>
-                            <a href="{% url 'band-profile' band.id %}"><button class="btn btn-primary">Profile page</button></a>
+                            <a href="https://{{ band.link }}">{{ band.link }}</a><br>
+                            <a class="btn btn-primary" href="{% url 'band-profile' band.id %}">Profile page</a>
                         </div>
                     </div>
                 {% endfor %}

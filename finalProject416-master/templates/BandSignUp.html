@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+        <h1>Add your band!</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit">
+        </form>
+        <a href="{% url 'welcome' %}">Exit</a>
+
+        {% comment %}<script>
+            var name = "{{ user.id }}";
+            document.getElementById("band_user").value = name;
+        </script>{% endcomment %}
+{% endblock %}

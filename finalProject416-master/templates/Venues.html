@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/profile-styles.css' %}">
+{% endblock %}
+{% block body %}
+    <h2 class="text-center" id="VenueTitle">Venues</h2>
+    <div class="container">
+        <div class="row justify-content-center m-2">
+            <div class="col-7">
+                {% for venue in venues %}
+                    <div class="card border-info m-3">
+                        <div class="card-header text-center">
+                            {{ venue.venueName }}
+                        </div>
+                        <div class="card-body">
+                            {{ venue.address }} <br>
+                            {{ venue.venueEmail }} <br>
+                            <a href="https://{{ venue.website }}">{{ venue.website }}</a> <br>
+                            <a class="btn btn-primary" href="{% url 'venue-profile' venue.id %}">Profile page</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

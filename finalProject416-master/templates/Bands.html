@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/profile-styles.css' %}">
+{% endblock %}
+{% block body %}
+    <h1 class="text-center" id="BandTitle">Bands</h1>
+    <div class="container">
+        <div class="row justify-content-center m-2">
+            <div class="col-7">
+                {% for band in bands %}
+                    <div class="card border-warning m-3">
+                        <div class="card-header text-center">
+                            {{ band.bandName }}
+                        </div>
+                        <div class="card-body">
+                            Email: {{ band.email }} <br>
+                            Located in: {{ band.location }} <br>
+                            <a href="https://{{ band.link }}">{{ band.link }}</a><br>
+                            <a class="btn btn-primary" href="{% url 'band-profile' band.id %}">Profile page</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{%  block body %}
+    <h1 class="text-center">Welcome {{ user.username }}</h1>
+    {% if user.is_authenticated == False %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-1">
+                    <a href="{% url 'sign-up' %}"><button class="btn btn-primary">Sign up</button></a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div id="Our Mission" class="container rounded border border-4 my-3 fadeIn">
+        <!---Just an opening paragraph about our mission with this website-->
+        <div class="row">
+            <h1 class="display-4">STAY LOCAL + LIVE</h1>
+            <p>
+                Connect with each other to entertain people with the best local live music around. Whether you are a local band rocking out and
+                trying to spread the word, or a new venue that needs something to keep the night moving, this tool BandView will give you all the
+                necessary tools you need in order to accomplish your goals and entertain those with the best live and local music around.
+            </p>
+        </div>
+    </div>
+    <div id="BandFunctions" class="container rounded border border-4 border-warning my-3 fadeIn">
+        <!---Function of this div: color blue, opening section with description, three title cards then button, color Orange-->
+        <div class="row text-center py-1">
+            <h3>Need a boost to make your band known around town? </h3>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'img/livemusic.jpg' %}" class="card-img-top" alt="...">
+                    <p class="lead">Search for gigs that can get your name around town </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'img/people.jpg' %}" class="card-img-top" alt="...">
+                    <p class="lead"> Customize your profile to display what you guys can do</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'img/pearljam.jpg' %}" class="card-img-top" alt="...">
+                    <p class="lead"> Organize events with venues with ease.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Venue Functions" class="container rounded border border-4 border-primary my-3 fadeIn">
+        <!---Function of this div: color blue, opening section with description, three title cards then button, color blue-->
+        <div class="row text-center py-1">
+            <h3>Need to make a quiet Thursday night more lively in your venue?</h3>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'img/venue1.jpeg' %}" class="card-img-top" alt="...">
+                    <p class="lead">Search for bands that can get your name around town </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'img/venue2.jpg' %}" class="card-img-top" alt="...">
+                    <p class="lead">Customize your profile to display information like what genre you look for, where your bands play and general attendance</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'img/venue3.jpg' %}" class="card-img-top" alt="...">
+                    <p class="lead">Organize and advertise public events with venues with ease.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Upcoming Events" class="container border border-dark my-2 rounded fadeIn">
+        <div class="row mb-2">
+            <div class="col-9">
+                <h1>Upcoming Events</h1>
+            </div>
+            <div class="col-3 my-auto text-center">
+                {% if venue != None %}
+                    <a class="btn btn-info btn-md" href="{% url 'createEvent' %}">Create Event</a>
+                {% endif %}
+            </div>
+        </div>
+        {% for event in events %}
+            {% if event.has_happened == False %}
+                <div class="row border mx-1 mb-2">
+                    <div class="col-9">
+                        <h1 class="display-6">{{ event.event_band }} is playing at {{ event.event_venue }}</h1>
+                        <p class="lead">On {{ event.date }} from {{ event.start_time }} to {{ event.end_time }}</p>
+                    </div>
+                    <div class="col-3 my-auto text-center">
+
+                    </div>
+
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

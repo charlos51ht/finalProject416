@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/venue-styles.css' %}">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center m-5">
+            <div class="col-10">
+                <div class="card bg-primary text-light">
+                    <div class="card-header text-center text-light" id="profile-header"><h1>{{ p_venue.venueName }}</h1></div>
+                    <div class="card-body">
+                        <h6><span id="profile-text">Venue Description:</span> {{ p_venue.venueDescription }}</h6>
+                        <h6><span id="profile-text">Email:</span> {{ p_venue.venueEmail }}</h6>
+                        <h6><span id="profile-text">Phone:</span> {{ p_venue.venuePhone }}</h6>
+                        <h6><span id="profile-text">Address:</span> {{ p_venue.address }}</h6>
+                        <h6><span id="profile-text">Website:</span><a href="https://{{ p_venue.website }}"> {{ p_venue.website }}</a></h6>
+                        {% if user.is_authenticated == True%}
+                            {% if user.id == p_venue.user.id %}
+                                <a class="btn btn-primary" href="{% url 'updateVenue' venue.id %}">Delete</a>
+                                <a class="btn btn-danger" href="{% url 'deleteVenue' venue.id %}">Update</a>
+                        {% endif %}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Upcoming Events" class="container border border-dark my-2 rounded">
+        <div class="row mb-2">
+            <div class="col-9">
+                <h1>Upcoming Events</h1>
+            </div>
+            <div class="col-3"></div>
+        </div>
+        {% for event in events %}
+            {% if event.has_happened == False %}
+                <div class="row border mx-1 mb-2">
+                    <div class="col-9">
+                        <h1 class="display-6">{{ event.event_band }} is playing at {{ event.event_venue }}</h1>
+                        <p class="lead">On {{ event.date }} from {{ event.start_time }} to {{ event.end_time }}</p>
+                    </div>
+                <div class="col-3"></div>
+
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center m-5">
+            <div class="col-5">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Login">
+                    <a href="{% url 'register' %}">Sign Up</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

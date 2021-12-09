@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+    <div class="container">
+        <div class="row justify content center m-5">
+            <div class="col-8">
+                <div class="card bg-warning">
+                    <div class="card-header">
+                        <h3>Are you sure you want to delete your band?</h3>
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'bands' %}" class="btn btn-secondary">CANCEL</a>
+                        <form action="" method="post" style="display: inline">
+                            {% csrf_token %}
+                            <input class="btn btn-danger text-light" type="submit" value="DELETE">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

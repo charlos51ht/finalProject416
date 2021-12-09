@@ -1,0 +1,28 @@
+#profile-text{
+    font-family: "Times New Roman", serif;
+    color: darkgoldenrod;
+    font-size: 20px;
+
+}
+
+#profile-header{
+    text-shadow: 1px 1px 1px coral,
+                2px 2px 1px coral;
+}
+
+h2{
+    font-family: "Times New Roman", serif;
+    color: blue;
+    text-shadow: 1px 1px 1px orangered,
+                2px 2px 1px orangered;
+    font-size: 50px;
+}
+
+#BandTitle{
+    font-family: "Times New Roman", serif;
+    color: orange;
+    text-shadow: 1px 1px 1px blue,
+                2px 2px 1px blue;
+    font-size: 50px;
+}
+

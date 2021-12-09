@@ -81,38 +81,6 @@ def signup(request):
         return redirect('welcome')
 
 
-
-
-def bandsignup(request):
-    if request.method == 'POST':
-        form = BandForm(request.POST or None)
-        if form.is_valid():
-            band = form.save(commit=False)
-            band.user = request.user
-            form.save()
-            return redirect('bands')
-        else:
-            return HttpResponse("Form is not valid")
-    else:
-        form = BandForm
-        return render(request, 'BandSignUp.html', {'form': form})
-
-
-def venuesignup(request):
-    if request.method == 'POST':
-        form = VenueForm(request.POST or None)
-        if form.is_valid():
-            venue = form.save(commit=False)
-            venue.user = request.user
-            form.save()
-            return redirect('venues')
-        else:
-            return HttpResponse("Form is not valid")
-    else:
-        form = VenueForm
-        return render(request, 'AddVenue.html', {'form': form})
-
-
 def bands(request):
     if request.method == 'POST':
         search = request.POST.get("search")#,bandDescription__contains=search,location__contains=search
@@ -202,3 +170,6 @@ def createEvent(request):
 def signout(request):
     logout(request)
     return redirect('welcome')
+
+def not_authenticated(request):
+    return render(request,'not_authenticated.html')

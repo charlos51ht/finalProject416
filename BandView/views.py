@@ -134,13 +134,17 @@ def venues(request):
 
 def bandprofile(request, band_id):
     b = Band.objects.get(pk=band_id)
-    context = {'band': b}
+    events = Event.objects.filter(event_band=b)
+    context = {'band': b,
+               'events' : events}
     return render(request, 'BandProfile.html', context)
 
 
 def venueprofile(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
-    context = {'venue': venue}
+    events = Event.objects.filter(event_venue=venue)
+    context = {'venue': venue,
+               'events': events}
     return render(request, 'VenueProfile.html', context)
 
 

@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block body %}
-        <h1>Sign up!</h1>
-        <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit">
-        </form>
-        <a href="{% url 'welcome' %}">Exit</a>
+    <h1 class="text-center">Sign up!</h1>
 
-        {% comment %}<script>
+    <div class="row justify-content-center m-5">
+        <div class="col-8">
+            <form action="" method="post" style="display: inline">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-primary m-2"type="submit" style="display: inline">
+            </form>
+            <a href="{% url 'welcome' %}"><button class="btn btn-danger">Exit</button></a>
+        </div>
+    </div>
+
+
+
+
+    {% comment %}<script>
             var name = "{{ user.id }}";
             document.getElementById("band_user").value = name;
         </script>{% endcomment %}

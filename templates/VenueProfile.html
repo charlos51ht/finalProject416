@@ -3,10 +3,20 @@
     <div class="container">
         <div class="row justify content center m-5">
             <div class="col-10">
-                <div class="card">
-                    <div class="card-header">{{ venue.venueName }}</div>
+                <div class="card bg-primary">
+                    <div class="card-header"><h1>{{ venue.venueName }}</h1></div>
                     <div class="card-body">
-                        {{ venue.address }}
+                        <h6><span id="profile-text">Venue Description: </span>{{ venue.venueDescription }}</h6>
+                        <h6><span id="profile-text">Email: </span>{{ venue.venueEmail }}</h6>
+                        <h6><span id="profile-text">Phone: </span>{{ venue.venuePhone }}</h6>
+                        <h6><span id="profile-text">Address: </span>{{ venue.address }}</h6>
+                        <h6><span id="profile-text">Website: </span><a href="{{ venue.website }}">{{ venue.website }}</a></h6>
+                        {% if user.is_authenticated %}
+                            {% if user.id == band.user.id %}
+                                <a href="{% url 'updateVenue' venue.id %}"><button class="btn btn-primary">Update</button></a>
+                                <a href="{% url 'deleteVenue' venue.id %}"><button class="btn btn-danger">Delete</button></a>
+                            {% endif %}
+                    {% endif %}
                     </div>
                 </div>
             </div>

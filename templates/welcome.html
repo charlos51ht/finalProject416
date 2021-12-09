@@ -1,77 +1,95 @@
 {% extends 'base.html' %}
+{% load static %}
 {%  block body %}
-    <h1 class="text-center">Welcome {{ user.username }}</h1>
-    <div id="Our Mission" class="container rounded border border-4">
+    <div id="Our Mission" class="container rounded border border-4 my-3">
         <!---Just an opening paragraph about our mission with this website-->
         <div class="row">
-            <h1 class="">STAY LOCAL + LIVE</h1>
+            <h1 class="display-4">STAY LOCAL + LIVE</h1>
             <p>
                 Connect with each other to entertain people with the best local live music around. Whether you are a local band rocking out and
-                trying to spread the word, or a new venue that needs something to keep the night moving, this tool (PENDING NAME) will give you all the
+                trying to spread the word, or a new venue that needs something to keep the night moving, this tool BandView will give you all the
                 necessary tools you need in order to accomplish your goals and entertain those with the best live and local music around.
             </p>
         </div>
     </div>
-    <div id="Band Functions" class="container rounded border border-4 border-warning">
+    <div id="Band Functions" class="container rounded border border-4 border-warning my-3">
         <!---Function of this div: color blue, opening section with description, three title cards then button, color Orange-->
-        <div class="row">
-            <p>Need a boost to make your band known around town? Look no further!</p>
+        <div class="row text-center py-1">
+            <h3>Need a boost to make your band known around town? </h3>
             <div class="col">
                 <div class="card">
-                    <img src="undraw_News_re_6uub.png" class="card-img-top" alt="...">
-                    <p>Function 1: search for gigs that can get your name around town </p>
+                    <img src="{% static 'img/livemusic.jpg' %}" class="card-img-top" alt="...">
+                    <p class="lead">Search for gigs that can get your name around town </p>
                 </div>
             </div>
             <div class="col">
                 <div class="card">
-                    <img src="undraw_News_re_6uub.png" class="card-img-top" alt="...">
-                    <p>Function 2: Customize your profile to display what you guys can do</p>
+                    <img src="{% static 'img/people.jpg' %}" class="card-img-top" alt="...">
+                    <p class="lead"> Customize your profile to display what you guys can do</p>
                 </div>
             </div>
             <div class="col">
                 <div class="card">
-                    <img src="undraw_News_re_6uub.png" class="card-img-top" alt="...">
-                    <p>Function 3: Organize events with venues with ease.</p>
+                    <img src="{% static 'img/pearljam.jpg' %}" class="card-img-top" alt="...">
+                    <p class="lead"> Organize events with venues with ease.</p>
                 </div>
             </div>
+            {% if venue == None and band == None %}
+                <a href="{% url 'band-sign-up' %}">Sign Up for Band</a>
+            {% endif %}
         </div>
     </div>
-    <div id="Venue Functions" class="container rounded border border-4 border-primary">
+    <div id="Venue Functions" class="container rounded border border-4 border-primary my-3">
         <!---Function of this div: color blue, opening section with description, three title cards then button, color blue-->
-        <div class="row">
-            <p>Need to make a quiet Thursday night more lively in your venue? Look no further!</p>
+        <div class="row text-center py-1">
+            <h3>Need to make a quiet Thursday night more lively in your venue?</h3>
             <div class="col">
                 <div class="card">
-                    <p>Function 1: search for bands that can get your name around town </p>
+                    <img src="{% static 'img/venue1.jpeg' %}" class="card-img-top" alt="...">
+                    <p class="lead">Search for bands that can get your name around town </p>
                 </div>
             </div>
             <div class="col">
                 <div class="card">
-                    <p>Function 2: Customize your profile to display information like what genre you look for, where your bands play and general atttendance</p>
+                    <img src="{% static 'img/venue2.jpg' %}" class="card-img-top" alt="...">
+                    <p class="lead">Customize your profile to display information like what genre you look for, where your bands play and general attendance</p>
                 </div>
             </div>
             <div class="col">
                 <div class="card">
-                    <p>Function 3: Organize and advertise public events with venues with ease.</p>
+                    <img src="{% static 'img/venue3.jpg' %}" class="card-img-top" alt="...">
+                    <p class="lead">Organize and advertise public events with venues with ease.</p>
                 </div>
             </div>
+            {% if venue == None and band == None %}
+                <a href="{% url 'venue-sign-up' %}">Sign Up for Band</a>
+            {% endif %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-5">
-            <a href=""><button></button></a>
+    <div id="Upcoming Events" class="container border border-dark my-2 rounded">
+        <div class="row mb-2">
+            <div class="col-9">
+                <h1>Upcoming Events</h1>
+            </div>
+            <div class="col-3 my-auto text-center">
+                {% if venue != None %}
+                    <a class="btn btn-info btn-md" href="{% url 'createEvent' %}">Create Event</a>
+                {% endif %}
+            </div>
         </div>
-    </div>
-    <div id="Upcoming Events" class="container">
-        <h1>Upcoming Events</h1>
-        {% if venue != None %}
-            <a href="{% url 'createEvent' %}">Create Event</a>
-        {% endif %}
         {% for event in events %}
-            <div class="row border">
-                <h1>{{ event.event_band }} is playing at {{ event.event_venue }}</h1>
-                <p>on {{ event.time }}</p>
-            </div>
+            {% if event.has_happened == False %}
+                <div class="row border mx-1 mb-2">
+                    <div class="col-9">
+                        <h1 class="display-6">{{ event.event_band }} is playing at {{ event.event_venue }}</h1>
+                        <p class="lead">On {{ event.date }} from {{ event.start_time }} to {{ event.end_time }}</p>
+                    </div>
+                    <div class="col-3 my-auto text-center">
+                        <a class="btn btn-primary btn-sm">Add to Calander</a>
+                    </div>
+
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}

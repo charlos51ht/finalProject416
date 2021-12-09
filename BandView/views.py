@@ -156,9 +156,9 @@ def updateBand(request, band_id):
             context = {'form': form}
             return render(request, 'updateBand.html', context)
         else:
-            return HttpResponse("Permission denied")
+            return HttpResponse("Access denied")
     else:
-        redirect('notauthenticated')
+        return redirect('notauthenticated')
 
 
 def deleteBand(request, band_id):
@@ -172,9 +172,9 @@ def deleteBand(request, band_id):
                 context = {'band': band}
                 return render(request, 'deleteBand.html', context)
         else:
-            return HttpResponse("Permission denied")
+            return HttpResponse("Access denied")
     else:
-        redirect('notauthenticated')
+        return redirect('notauthenticated')
 
 
 def updateVenue(request, venue_id):
@@ -189,14 +189,14 @@ def updateVenue(request, venue_id):
             context = {'form': form}
             return render(request, 'updateVenue.html', context)
         else:
-            return HttpResponse("Permission denied")
+            return HttpResponse("Access denied")
     else:
-        redirect('notauthenticated')
+        return redirect('notauthenticated')
 
 
 def deleteVenue(request, venue_id):
     if request.user.is_authenticated:
-        venue = Band.objects.get(pk=venue_id)
+        venue = Venue.objects.get(pk=venue_id)
         if request.user.id == venue.user.id:
             if request.method == 'POST':
                 venue.delete()
@@ -205,9 +205,9 @@ def deleteVenue(request, venue_id):
                 context = {'venue': venue}
                 return render(request, 'deleteVenue.html', context)
         else:
-            return HttpResponse("Permission denied")
+            return HttpResponse("Access denied")
     else:
-        redirect('notauthenticated')
+        return redirect('notauthenticated')
 
 def createEvent(request):
     if request.method == 'POST':

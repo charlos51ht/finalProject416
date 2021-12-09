@@ -4,19 +4,19 @@
         <div class="row justify content center m-5">
             <div class="col-10">
                 <div class="card bg-primary">
-                    <div class="card-header"><h1>{{ p_venue.venueName }}</h1></div>
+                    <div class="card-header"><h1>{{ venue.venueName }}</h1></div>
                     <div class="card-body">
-                        <h6><span id="profile-text">Venue Description: </span>{{ p_venue.venueDescription }}</h6>
-                        <h6><span id="profile-text">Email: </span>{{ p_venue.venueEmail }}</h6>
-                        <h6><span id="profile-text">Phone: </span>{{ p_venue.venuePhone }}</h6>
-                        <h6><span id="profile-text">Address: </span>{{ p_venue.address }}</h6>
-                        <h6><span id="profile-text">Website: </span><a style="color: white" href="{{ p_venue.website }}">{{ p_venue.website }}</a></h6>
+                        <h6><span id="profile-text">Venue Description: </span>{{ venue.venueDescription }}</h6>
+                        <h6><span id="profile-text">Email: </span>{{ venue.venueEmail }}</h6>
+                        <h6><span id="profile-text">Phone: </span>{{ venue.venuePhone }}</h6>
+                        <h6><span id="profile-text">Address: </span>{{ venue.address }}</h6>
+                        <h6><span id="profile-text">Website: </span><a href="{{ venue.website }}">{{ venue.website }}</a></h6>
                         {% if user.is_authenticated %}
-                            {% if user.id == p_venue.user.id %}
-                                <a href="{% url 'updateVenue' p_venue.id %}">Update</a>
-                                <a href="{% url 'deleteVenue' p_venue.id %}">Delete</a>
+                            {% if user.id == band.user.id %}
+                                <a href="{% url 'updateVenue' venue.id %}"><button class="btn btn-primary">Update</button></a>
+                                <a href="{% url 'deleteVenue' venue.id %}"><button class="btn btn-danger">Delete</button></a>
                             {% endif %}
-                        {% endif %}
+                    {% endif %}
                     </div>
                 </div>
             </div>

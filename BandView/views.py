@@ -81,6 +81,38 @@ def signup(request):
         return redirect('welcome')
 
 
+
+
+# def bandsignup(request):
+#     if request.method == 'POST':
+#         form = BandForm(request.POST or None)
+#         if form.is_valid():
+#             band = form.save(commit=False)
+#             band.user = request.user
+#             form.save()
+#             return redirect('bands')
+#         else:
+#             return HttpResponse("Form is not valid")
+#     else:
+#         form = BandForm
+#         return render(request, 'BandSignUp.html', {'form': form})
+#
+#
+# def venuesignup(request):
+#     if request.method == 'POST':
+#         form = VenueForm(request.POST or None)
+#         if form.is_valid():
+#             venue = form.save(commit=False)
+#             venue.user = request.user
+#             form.save()
+#             return redirect('venues')
+#         else:
+#             return HttpResponse("Form is not valid")
+#     else:
+#         form = VenueForm
+#         return render(request, 'AddVenue.html', {'form': form})
+
+
 def bands(request):
     if request.method == 'POST':
         search = request.POST.get("search")#,bandDescription__contains=search,location__contains=search
@@ -162,45 +194,69 @@ def venueprofile(request, venue_id):
 
 
 def updateBand(request, band_id):
-    band = Band.objects.get(pk=band_id)
-    form = BandForm(request.POST or None, instance=band)
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return redirect('bands')
-    context = {'form': form}
-    return render(request, 'updateBand.html', context)
+    if request.user.is_authenticated:
+        band = Band.objects.get(pk=band_id)
+        if request.user.id == band.user.id:
+            form = BandForm(request.POST or None, instance=band)
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.save()
+                    return redirect('bands')
+            context = {'form': form}
+            return render(request, 'updateBand.html', context)
+        else:
+            return HttpResponse("Access denied")
+    else:
+        return redirect('notauthenticated')
 
 
 def deleteBand(request, band_id):
-    band = Band.objects.get(pk=band_id)
-    if request.method == 'POST':
-        band.delete()
-        return redirect('bands')
+    if request.user.is_authenticated:
+        band = Band.objects.get(pk=band_id)
+        if request.user.id == band.user.id:
+            if request.method == 'POST':
+                band.delete()
+                return redirect('bands')
+            else:
+                context = {'band': band}
+                return render(request, 'deleteBand.html', context)
+        else:
+            return HttpResponse("Access denied")
     else:
-        context = {'band': band}
-        return render(request, 'deleteBand.html', context)
+        return redirect('notauthenticated')
 
 
 def updateVenue(request, venue_id):
-    venue = Venue.objects.get(pk=venue_id)
-    form = VenueForm(request.POST or None, instance=venue)
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return redirect('venues')
-    context = {'form': form}
-    return render(request, 'updateVenue.html', context)
+    if request.user.is_authenticated:
+        venue = Venue.objects.get(pk=venue_id)
+        if request.user.id == venue.user.id:
+            form = VenueForm(request.POST or None, instance=venue)
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.save()
+                    return redirect('venues')
+            context = {'form': form}
+            return render(request, 'updateVenue.html', context)
+        else:
+            return HttpResponse("Access denied")
+    else:
+        return redirect('notauthenticated')
 
 
 def deleteVenue(request, venue_id):
-    venue = Band.objects.get(pk=venue_id)
-    if request.method == 'POST':
-        venue.delete()
-        return redirect('venues')
+    if request.user.is_authenticated:
+        venue = Venue.objects.get(pk=venue_id)
+        if request.user.id == venue.user.id:
+            if request.method == 'POST':
+                venue.delete()
+                return redirect('venues')
+            else:
+                context = {'venue': venue}
+                return render(request, 'deleteVenue.html', context)
+        else:
+            return HttpResponse("Access denied")
     else:
-        context = {'venue': venue}
-        return render(request, 'deleteVenue.html', context)
+        return redirect('notauthenticated')
 
 def createEvent(request):
     if request.method == 'POST':
@@ -221,4 +277,4 @@ def signout(request):
     return redirect('welcome')
 
 def not_authenticated(request):
-    return render(request,'not_authenticated.html')
+    return render(request, 'not_authenticated.html')

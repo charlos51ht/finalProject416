@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1 class="text-center">Please register or login to access this page.</h1>
+<div class="row justify-content-center">
+    <div class="col-3">
+        <a href="{% url 'welcome' %}"><button class="btn btn-info">Go to home page</button></a>
+        <a href="{% url 'register' %}"><button class="btn btn-primary">Register</button></a>
+        <a href="{% url 'sign-in' %}"><button class="btn btn-success">Log in</button></a>
+    </div>
+</div>
+{% endblock %}

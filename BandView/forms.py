@@ -10,16 +10,30 @@ class BandForm(forms.ModelForm):
         fields = '__all__'
         exclude = ["user"]
 
-        widgets = {
-            #'user': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'yes', 'id': 'band_user','value': '', 'type':'hidden'})
-            'user': forms.Select(attrs={'class': 'form-control'})
-        }
+        # widgets = {
+        #     'bandName': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'bandDescription': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'email': forms.EmailField(attrs={'class': 'form-control'}),
+        #     'phone': forms.IntegerField(attrs={'class': 'form-control'}),
+        #     'link': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'genre': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'location': forms.TextInput(attrs={'class': 'form-control'}),
+        # }
 
 class VenueForm(forms.ModelForm):
     class Meta:
         model = Venue
         fields = '__all__'
         exclude = ["user"]
+
+        # widgets = {
+        #     'venueName': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'venueDescription': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'address': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'venueEmail': forms.EmailField(attrs={'class': 'form-control'}),
+        #     'venuePhone': forms.IntegerField(attrs={'class': 'form-control'}),
+        #     'website': forms.TextInput(attrs={'class': 'form-control'}),
+        # }
 
 class UserRegistrationForm(UserCreationForm):
     TYPE_CHOICES = (

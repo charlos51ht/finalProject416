@@ -45,5 +45,6 @@ class EventForm(forms.ModelForm):
         exclude = ["event_venue"]
         widgets = {
             'date': DateInput(),
-            'time': TimeInput()
+            'start_time': TimeInput(),
+            'end_time': TimeInput()
         }

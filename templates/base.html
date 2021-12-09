@@ -20,12 +20,20 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <nav class="nav navbar-dark bg-dark navbar-expand-lg">
-        <a class="navbar-brand" href="#">Bandview</a>
+        <a class="navbar-brand" href="{% url 'welcome' %}">Bandview</a>
         <button class="navbar-toggler ms-auto" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse me-auto" id="navbarSupportedContent">
+            <form class="form-inline justify-content-center my-2" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <input class="form-control" name="search" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-primary btn-sm" type="submit" formaction="{% url 'bands' %}">Search Bands</button>
+                <button class="btn btn-outline-warning btn-sm" type="submit" formaction="{% url 'venues' %}">Search Venues</button>
+            </div>
+            </form>
             <ul class="navbar-nav ms-auto justify-content-center">
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'welcome' %}">Welcome</a>
@@ -37,10 +45,10 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'bands' %}">Search For Band</a>
+                    <a class="nav-link active" href="{% url 'bands'%}">Search For Band</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'venues' %}">Search for Venue</a>
+                    <a class="nav-link active" href="{% url 'venues'%}">Search for Venue</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Profile</a>

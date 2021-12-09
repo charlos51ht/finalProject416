@@ -1,5 +1,9 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
+from datetime import time
 # Create your models here.
 
 class Band(models.Model):
@@ -47,8 +51,13 @@ class UserType(models.Model):
     user_type = models.CharField(max_length=5, blank=False, choices=TYPE_CHOICES)
 
 class Event(models.Model):
-    event_band = models.OneToOneField(Band, on_delete=models.CASCADE)
-    event_venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
+    event_band = models.ForeignKey(Band, on_delete=models.CASCADE)
+    event_venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
     date = models.DateField()
-    time = models.TimeField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    @property
+    def has_happened(self):
+        return date.today() > self.date
 

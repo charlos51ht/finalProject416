@@ -114,12 +114,21 @@ def venuesignup(request):
 
 
 def bands(request):
-    bands = Band.objects.all()
+    if request.method == 'POST':
+        search = request.POST.get("search")#,bandDescription__contains=search,location__contains=search
+        bands = Band.objects.filter(bandName__icontains=search)|Band.objects.filter(bandDescription__icontains=search)|Band.objects.filter(location__icontains=search)
+    else:
+        bands = Band.objects.all()
     return render(request, 'Bands.html', {'bands': bands})
 
 
 def venues(request):
-    venues = Venue.objects.all()
+    if request.method == 'POST':
+        search = request.POST.get("search")  # ,bandDescription__contains=search,location__contains=search
+        venues = Venue.objects.filter(venueName__icontains=search) | Venue.objects.filter(
+            venueDescription__icontains=search) | Venue.objects.filter(address__icontains=search)
+    else:
+        venues = Venue.objects.all()
     return render(request, 'Venues.html', {'venues': venues})
 
 
@@ -185,10 +194,10 @@ def createEvent(request):
             form.save()
             return redirect('welcome')
         else:
-            return HttpResponse("Form is not valid")
+            return HttpResponse("Form is not valid ")
     else:
         form = EventForm
-        return render(request, 'BandSignUp.html', {'form': form})
+        return render(request, 'AddEvent.html', {'form': form})
 
 def signout(request):
     logout(request)

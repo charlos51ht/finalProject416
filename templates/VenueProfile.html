@@ -22,4 +22,24 @@
             </div>
         </div>
     </div>
+    <div id="Upcoming Events" class="container border border-dark my-2 rounded">
+        <div class="row mb-2">
+            <div class="col-9">
+                <h1>Upcoming Events</h1>
+            </div>
+            <div class="col-3"></div>
+        </div>
+        {% for event in events %}
+            {% if event.has_happened == False %}
+                <div class="row border mx-1 mb-2">
+                    <div class="col-9">
+                        <h1 class="display-6">{{ event.event_band }} is playing at {{ event.event_venue }}</h1>
+                        <p class="lead">On {{ event.date }} from {{ event.start_time }} to {{ event.end_time }}</p>
+                    </div>
+                <div class="col-3"></div>
+
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}

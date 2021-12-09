@@ -34,9 +34,6 @@
                     <p class="lead"> Organize events with venues with ease.</p>
                 </div>
             </div>
-            {% if venue == None and band == None %}
-                <a href="{% url 'band-sign-up' %}">Sign Up for Band</a>
-            {% endif %}
         </div>
     </div>
     <div id="Venue Functions" class="container rounded border border-4 border-primary my-3">
@@ -61,9 +58,6 @@
                     <p class="lead">Organize and advertise public events with venues with ease.</p>
                 </div>
             </div>
-            {% if venue == None and band == None %}
-                <a href="{% url 'venue-sign-up' %}">Sign Up for Band</a>
-            {% endif %}
         </div>
     </div>
     <div id="Upcoming Events" class="container border border-dark my-2 rounded">

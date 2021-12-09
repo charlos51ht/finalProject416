@@ -87,7 +87,17 @@ def bands(request):
         bands = Band.objects.filter(bandName__icontains=search)|Band.objects.filter(bandDescription__icontains=search)|Band.objects.filter(location__icontains=search)
     else:
         bands = Band.objects.all()
-    return render(request, 'Bands.html', {'bands': bands})
+
+    band = None
+    venue = None
+    user = request.user
+    if (request.user.is_authenticated):
+        user_type = UserType.objects.get(user=request.user).user_type
+        if (user_type == 'Band'):
+            band = Band.objects.get(user=user)
+        if (user_type == 'Venue'):
+            venue = Venue.objects.get(user=user)
+    return render(request, 'Bands.html', {'bands': bands, 'user': user,'band':band,'venue':venue})
 
 
 def venues(request):
@@ -97,22 +107,57 @@ def venues(request):
             venueDescription__icontains=search) | Venue.objects.filter(address__icontains=search)
     else:
         venues = Venue.objects.all()
-    return render(request, 'Venues.html', {'venues': venues})
+
+    band = None
+    venue = None
+    user = request.user
+    if (request.user.is_authenticated):
+        user_type = UserType.objects.get(user=request.user).user_type
+        if (user_type == 'Band'):
+            band = Band.objects.get(user=user)
+        if (user_type == 'Venue'):
+            venue = Venue.objects.get(user=user)
+    return render(request, 'Venues.html', {'venues': venues, 'user': request.user, 'band': band, 'venue': venue})
 
 
 def bandprofile(request, band_id):
     b = Band.objects.get(pk=band_id)
     events = Event.objects.filter(event_band=b)
-    context = {'band': b,
-               'events' : events}
+    band = None
+    venue = None
+    user = request.user
+
+    if (request.user.is_authenticated):
+        user_type = UserType.objects.get(user=request.user).user_type
+        if (user_type == 'Band'):
+            band = Band.objects.get(user=user)
+        if (user_type == 'Venue'):
+            venue = Venue.objects.get(user=user)
+    context = {'p_band': b,
+               'user': request.user,
+               'events' : events,
+               'band':band,
+               'venue':venue}
     return render(request, 'BandProfile.html', context)
 
 
 def venueprofile(request, venue_id):
-    venue = Venue.objects.get(pk=venue_id)
-    events = Event.objects.filter(event_venue=venue)
-    context = {'venue': venue,
-               'events': events}
+    v = Venue.objects.get(pk=venue_id)
+    events = Event.objects.filter(event_venue=v)
+    band = None
+    venue = None
+    user = request.user
+    if (request.user.is_authenticated):
+        user_type = UserType.objects.get(user=request.user).user_type
+        if (user_type == 'Band'):
+            band = Band.objects.get(user=user)
+        if (user_type == 'Venue'):
+            venue = Venue.objects.get(user=user)
+    context = {'p_venue': v,
+               'user': request.user,
+               'events': events,
+               'band': band,
+               'venue': venue}
     return render(request, 'VenueProfile.html', context)
 
 

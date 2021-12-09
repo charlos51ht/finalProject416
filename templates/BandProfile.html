@@ -18,8 +18,8 @@
                         <h6><span id="profile-text">Located in: </span>{{ band.location }}</h6>
                         {% if user.is_authenticated %}
                             {% if user.id == band.user.id %}
-                                <a href="{% url 'updateBand' band.id %}"><button class="btn btn-primary">Update</button></a>
-                                <a href="{% url 'deleteBand' band.id %}"><button class="btn btn-danger">Delete</button></a>
+                                <a class="btn btn-primary" href="{% url 'updateBand' band.id %}">Update</a>
+                                <a class="btn btn-danger" href="{% url 'deleteBand' band.id %}">Delete</a>
                             {% endif %}
                     {% endif %}
                     </div>

@@ -60,7 +60,8 @@ def signin(request):
 def signup(request):
     if request.user.is_authenticated:
         user = UserType.objects.get(user_id=request.user.id)
-        if (user.user_type == 'Band' and Band.objects.count() == 0) or (user.user_type == 'Venue' and Venue.objects.count() == 0):
+        if (user.user_type == 'Band' and Band.objects.filter(user=request.user).count() == 0) or (
+                user.user_type == 'Venue' and Venue.objects.filter(user=request.user).count() == 0):
             redirect_page = "venues"
             if user.user_type == 'Band':
                 form = BandForm(request.POST or None)
@@ -139,13 +140,16 @@ def venueprofile(request, venue_id):
 def updateBand(request, band_id):
     if request.user.is_authenticated:
         band = Band.objects.get(pk=band_id)
-        form = BandForm(request.POST or None, instance=band)
-        if request.method == 'POST':
-            if form.is_valid():
-                form.save()
-                return redirect('bands')
-        context = {'form': form}
-        return render(request, 'updateBand.html', context)
+        if request.user.id == band.user.id:
+            form = BandForm(request.POST or None, instance=band)
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.save()
+                    return redirect('bands')
+            context = {'form': form}
+            return render(request, 'updateBand.html', context)
+        else:
+            return HttpResponse("Permission denied")
     else:
         return redirect('notauthenticated')
 
@@ -153,12 +157,15 @@ def updateBand(request, band_id):
 def deleteBand(request, band_id):
     if request.user.is_authenticated:
         band = Band.objects.get(pk=band_id)
-        if request.method == 'POST':
-            band.delete()
-            return redirect('bands')
+        if request.user.id == band.user.id:
+            if request.method == 'POST':
+                band.delete()
+                return redirect('bands')
+            else:
+                context = {'band': band}
+                return render(request, 'deleteBand.html', context)
         else:
-            context = {'band': band}
-            return render(request, 'deleteBand.html', context)
+            return HttpResponse("Permission denied")
     else:
         return redirect('notauthenticated')
 
@@ -166,13 +173,16 @@ def deleteBand(request, band_id):
 def updateVenue(request, venue_id):
     if request.user.is_authenticated:
         venue = Venue.objects.get(pk=venue_id)
-        form = VenueForm(request.POST or None, instance=venue)
-        if request.method == 'POST':
-            if form.is_valid():
-                form.save()
-                return redirect('venues')
-        context = {'form': form}
-        return render(request, 'updateVenue.html', context)
+        if request.user.id == venue.user.id:
+            form = VenueForm(request.POST or None, instance=venue)
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.save()
+                    return redirect('venues')
+            context = {'form': form}
+            return render(request, 'updateVenue.html', context)
+        else:
+            return HttpResponse("Permission denied")
     else:
         return redirect('notauthenticated')
 
@@ -180,12 +190,15 @@ def updateVenue(request, venue_id):
 def deleteVenue(request, venue_id):
     if request.user.is_authenticated:
         venue = Band.objects.get(pk=venue_id)
-        if request.method == 'POST':
-            venue.delete()
-            return redirect('venues')
+        if request.user.id == venue.user.id:
+            if request.method == 'POST':
+                venue.delete()
+                return redirect('venues')
+            else:
+                context = {'venue': venue}
+                return render(request, 'deleteVenue.html', context)
         else:
-            context = {'venue': venue}
-            return render(request, 'deleteVenue.html', context)
+            return HttpResponse("Permission denied")
     else:
         return redirect('notauthenticated')
 

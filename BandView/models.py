@@ -11,7 +11,6 @@ class Band(models.Model):
     link = models.CharField(max_length=100)
     genre = models.CharField(max_length=30, blank=False)
     location = models.CharField(max_length=100)
-    profilePic = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
         return self.bandName
@@ -24,7 +23,6 @@ class Venue(models.Model):
     venueEmail = models.EmailField(max_length=254, blank=False)
     venuePhone = models.IntegerField(blank=False)
     website = models.CharField(max_length=200)
-    profilePic = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
         return self.venueName

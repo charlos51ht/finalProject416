@@ -11,11 +11,11 @@
                         <h6><span id="profile-text">Phone: </span>{{ venue.venuePhone }}</h6>
                         <h6><span id="profile-text">Address: </span>{{ venue.address }}</h6>
                         <h6><span id="profile-text">Website: </span><a href="{{ venue.website }}">{{ venue.website }}</a></h6>
-                        {% if user.is_authenticated %}
-                            {% if user.id == band.user.id %}
-                                <a href="{% url 'updateVenue' venue.id %}"><button class="btn btn-primary">Update</button></a>
-                                <a href="{% url 'deleteVenue' venue.id %}"><button class="btn btn-danger">Delete</button></a>
-                            {% endif %}
+                        {% if user.is_authenticated == True%}
+                            {% if user.id == venue.user.id %}
+                                <a class="btn btn-primary" href="{% url 'updateVenue' venue.id %}">Delete</a>
+                                <a class="btn btn-danger" href="{% url 'deleteVenue' venue.id %}">Update</a>
+                        {% endif %}
                     {% endif %}
                     </div>
                 </div>

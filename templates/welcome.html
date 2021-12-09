@@ -2,14 +2,16 @@
 {% load static %}
 {%  block body %}
     <h1 class="text-center">Welcome {{ user.username }}</h1>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-1">
-                <a href="{% url 'sign-up' %}"><button class="btn btn-primary">Sign up</button></a>
+    {% if user.is_authenticated == False %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-1">
+                    <a href="{% url 'sign-up' %}"><button class="btn btn-primary">Sign up</button></a>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="Our Mission" class="container rounded border border-4 my-3">
+    {% endif %}
+    <div id="Our Mission" class="container rounded border border-4 my-3 fadeIn">
         <!---Just an opening paragraph about our mission with this website-->
         <div class="row">
             <h1 class="display-4">STAY LOCAL + LIVE</h1>
@@ -20,7 +22,7 @@
             </p>
         </div>
     </div>
-    <div id="Band Functions" class="container rounded border border-4 border-warning my-3">
+    <div id="BandFunctions" class="container rounded border border-4 border-warning my-3 fadeIn">
         <!---Function of this div: color blue, opening section with description, three title cards then button, color Orange-->
         <div class="row text-center py-1">
             <h3>Need a boost to make your band known around town? </h3>
@@ -44,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div id="Venue Functions" class="container rounded border border-4 border-primary my-3">
+    <div id="Venue Functions" class="container rounded border border-4 border-primary my-3 fadeIn">
         <!---Function of this div: color blue, opening section with description, three title cards then button, color blue-->
         <div class="row text-center py-1">
             <h3>Need to make a quiet Thursday night more lively in your venue?</h3>
@@ -68,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div id="Upcoming Events" class="container border border-dark my-2 rounded">
+    <div id="Upcoming Events" class="container border border-dark my-2 rounded fadeIn">
         <div class="row mb-2">
             <div class="col-9">
                 <h1>Upcoming Events</h1>
